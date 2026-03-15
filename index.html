@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C언어 마스터: 카드 매칭 학습</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>C Language Explorer</h1>
+            <p>카드를 맞춰 C언어의 핵심 개념을 학습하세요.</p>
+        </header>
+
+        <main class="game-area">
+            <div class="card-grid" id="cardGrid">
+                <!-- JavaScript가 여기에 카드를 생성합니다 -->
+            </div>
+
+            <aside class="info-panel">
+                <h2>학습 가이드</h2>
+                <div id="descriptionContainer" class="description-container">
+                    <p class="placeholder-text">동일한 C언어 키워드 카드를 두 장 찾으면 이곳에 설명이 나타납니다.</p>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span>성공한 매치</span>
+                        <span id="matchCount">0 / 8</span>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
