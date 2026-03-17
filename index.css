@@ -1,230 +1,166 @@
-:root {
-    --bg-color: #0a0e14;
-    --card-bg: rgba(255, 255, 255, 0.05);
-    --card-hover: rgba(255, 255, 255, 0.1);
-    --accent-color: #00d2ff;
-    --accent-glow: rgba(0, 210, 255, 0.5);
-    --text-primary: #ffffff;
-    --text-secondary: #b0b8c4;
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --font-main: 'Inter', sans-serif;
-    --font-code: 'Fira Code', monospace;
-}
+        .mainpage {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+        }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+        .content {
+            background-image: linear-gradient(to bottom, lightgray, black);
+            width: 50%;
+        }
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-primary);
-    font-family: var(--font-main);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* 스크롤 방지 */
-}
+        .scene1 {
+            width: 100%;
+            height: 300px;
+        }
 
-.container {
-    width: 98%;
-    max-width: 1100px;
-    height: 95vh;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-}
+        .scene2 {
+            width: 100%;
+            height: 300px;
+        }
 
-header {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
+        .scene3 {
+            width: 100%;
+            height: 300px;
+        }
 
-header h1 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.2rem;
-}
+        .scene4 {
+            width: 100%;
+            height: 300px;
+        }
 
-header p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
+        /* CSS 핵심 설정 */
+        .main-wrapper {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            margin: 100px auto;
+        }
 
-/* 게임 영역 레이아웃 */
-.game-area {
-    display: grid;
-    grid-template-columns: 1.8fr 1.2fr;
-    gap: 1.5rem;
-    flex-grow: 1;
-    min-height: 0; /* 내부 스크롤 허용을 위한 설정 */
-}
+        .carousel-view {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            /* 하단 50%를 칼같이 자름 */
+            position: relative;
+        }
 
-/* 카드 그리드 스타일 */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    gap: 0.75rem;
-}
+        .item-list {
+            position: absolute;
+            width: 100%;
+            height: 500px;
+            /* 전체 원의 지름 */
+            top: 0;
+            left: 0;
+            list-style: none;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center 250px;
+            /* 반원의 밑변 중앙이 회전축 */
+        }
 
-/* 개별 카드 스타일 */
-.card {
-    position: relative;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
+        .item {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            left: calc(50% - 40px);
+            top: 0px;
+            transform-origin: center 250px;
+            /* 회전축을 아이템 아래쪽으로 멀리 둠 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
 
-.card.flipped {
-    transform: rotateY(180deg);
-}
+        /* 6개 아이템을 60도 간격으로 배치 (시작 시 1번이 정중앙) */
+        .item:nth-child(1) {
+            transform: rotate(0deg);
+        }
 
-.card.matched {
-    transform: rotateY(180deg) scale(0.92);
-    opacity: 0.5;
-    cursor: default;
-}
+        .item:nth-child(2) {
+            transform: rotate(60deg);
+        }
 
-.card-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
+        .item:nth-child(3) {
+            transform: rotate(120deg);
+        }
 
-/* 카드 앞면 */
-.card-front {
-    background: var(--card-bg);
-    backdrop-filter: blur(4px);
-    background-image: radial-gradient(circle at 50% 50%, rgba(0, 210, 255, 0.05) 0%, transparent 80%);
-}
+        .item:nth-child(4) {
+            transform: rotate(180deg);
+        }
 
-.card-front::after {
-    content: '?';
-    font-size: 1.8rem;
-    color: var(--accent-color);
-}
+        .item:nth-child(5) {
+            transform: rotate(240deg);
+        }
 
-/* 카드 뒷면 */
-.card-back {
-    background: linear-gradient(135deg, rgba(58, 123, 213, 0.15) 0%, rgba(0, 210, 255, 0.15) 100%);
-    transform: rotateY(180deg);
-    font-family: var(--font-code);
-    color: var(--accent-color);
-    padding: 8px;
-    text-align: center;
-    font-size: 0.9rem;
-}
+        .item:nth-child(6) {
+            transform: rotate(300deg);
+        }
 
-/* 인포 패널 스타일 */
-.info-panel {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
+        /* 무한 회전처럼 보이게 하는 각도 조절 */
+        #step1:checked~.carousel-view .item-list {
+            transform: rotate(0deg);
+        }
 
-.info-panel h2 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    color: var(--accent-color);
-    flex-shrink: 0;
-}
+        #step2:checked~.carousel-view .item-list {
+            transform: rotate(-60deg);
+        }
 
-.description-container {
-    flex-grow: 1;
-    overflow-y: auto; /* 설명 내역이 많아질 경우 내부에서만 스크롤 */
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding-right: 5px;
-}
+        #step3:checked~.carousel-view .item-list {
+            transform: rotate(-120deg);
+        }
 
-/* 스크롤바 디자인 */
-.description-container::-webkit-scrollbar {
-    width: 4px;
-}
-.description-container::-webkit-scrollbar-thumb {
-    background: var(--glass-border);
-    border-radius: 10px;
-}
+        #step4:checked~.carousel-view .item-list {
+            transform: rotate(-180deg);
+        }
 
-.placeholder-text {
-    color: var(--text-secondary);
-    font-style: italic;
-    font-size: 0.9rem;
-}
+        #step5:checked~.carousel-view .item-list {
+            transform: rotate(-240deg);
+        }
 
-.match-item {
-    padding: 0.75rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--glass-border);
-    border-radius: 8px;
-    animation: slideIn 0.3s ease-out;
-}
+        #step6:checked~.carousel-view .item-list {
+            transform: rotate(-300deg);
+        }
 
-.match-item.recent {
-    border-color: var(--accent-color);
-    background: rgba(0, 210, 255, 0.05);
-}
+        /* 중앙 버튼 (잘리지 않게 분리) */
+        .center-button-area {
+            position: absolute;
+            bottom: 0px;
+            /* 반원 밑변에 배치 */
+            left: 55%;
+            transform: translate(-50%, 50%);
+            /* 중심 정확히 맞춤 */
+            z-index: 100;
+        }
 
-.match-item h3 {
-    font-family: var(--font-code);
-    color: var(--accent-color);
-    margin-bottom: 0.4rem;
-    font-size: 1rem;
-}
+        .btn {
+            width: 90px;
+            height: 90px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
 
-.match-item p {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: var(--text-secondary);
-}
+        /* 현재 단계에 맞는 버튼만 활성화 */
+        #step1:checked~.center-button-area .b1,
+        #step2:checked~.center-button-area .b2,
+        #step3:checked~.center-button-area .b3,
+        #step4:checked~.center-button-area .b4,
+        #step5:checked~.center-button-area .b5,
+        #step6:checked~.center-button-area .b6 {
+            display: flex;
+        }
 
-.stats {
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--glass-border);
-    margin-top: 1rem;
-    flex-shrink: 0;
-}
-
-.stat-item {
-    display: flex;
-    justify-content: space-between;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-@keyframes slideIn {
-    from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-    .game-area {
-        grid-template-columns: 1fr;
-    }
-    .info-panel {
-        order: -1;
-    }
-}
+        input[type="radio"] {
+            display: none;
+        }
